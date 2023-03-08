@@ -35,7 +35,7 @@ public class BookValidationTests {
     @Test
     void whenIsbnDefinedButIncorrectTHenValidationFails() {
         var book = Book.builder()
-                        .isbn("1234567890")
+                        .isbn("123456789012344")
                         .title( "Title")
                         .author("Author")
                         .price(9.90)
