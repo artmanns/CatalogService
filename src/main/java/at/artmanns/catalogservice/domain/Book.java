@@ -1,54 +1,67 @@
 package at.artmanns.catalogservice.domain;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Version;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
-
-public record Book(
+@Entity
+@Table(name = "books")
+@Data
+@RequiredArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Book {
 
         @Id
-        Long id,
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "id", nullable = false)
+        private Long id;
+
         @NotBlank(message = "The book ISBN must be defined.")
         @Pattern(
                 regexp = "^([0-9]{10}|[0-9]{13})$",
                 message = "The ISBN format mus be valid."
         )
-        String isbn,
+        private String isbn;
         @NotBlank(
                 message = "The book title must be defined."
         )
-        String title,
+        private String title;
         @NotBlank(
                 message = "The author must be defined."
         )
-        String author,
+        private String author;
         @NotNull(
                 message = "The price must be defined."
         )
         @Positive (
                 message = "The book price must be greater than zero."
         )
-        Double price,
+        private Double price;
 
-        @CreatedDate
-        Instant createdDate,
+        @CreationTimestamp
+        private LocalDateTime createdDate;
 
-        @LastModifiedDate
-        Instant lastModifiedDate,
+        @UpdateTimestamp
+        private LocalDateTime lastModifiedDate;
 
         @Version
-        int version
-) {
-        public static Book of(String isbn, String title, String author, Double price) {
-                return new Book(null, isbn, title, author, price, null, null, 0);
-        }
+        private int version;
+
+
 }

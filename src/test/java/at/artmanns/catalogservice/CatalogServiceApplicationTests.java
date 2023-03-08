@@ -19,7 +19,14 @@ class CatalogServiceApplicationTests {
 
     @Test
     void whenPostRequestThenBookCreated() {
-        var expectBook = new Book("1231231231", "Title", "Author", 9.90);
+
+        var expectBook = Book.builder()
+                .isbn("1234567891")
+                .title( "Northern Lights")
+                .author("Lyra Silvestar")
+                .price(9.90)
+                .build();
+
 
         webTestClient
                 .post()
@@ -29,8 +36,8 @@ class CatalogServiceApplicationTests {
                 .expectStatus().isCreated()
                 .expectBody(Book.class).value(actualBook -> {
                    assertThat(actualBook).isNotNull();
-                   assertThat(actualBook.isbn())
-                           .isEqualTo(expectBook.isbn());
+                   assertThat(actualBook.getIsbn())
+                           .isEqualTo(expectBook.getIsbn());
                 });
     }
 

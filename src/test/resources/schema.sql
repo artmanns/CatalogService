@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS books;
-CREATE TABLE books (
+DROP TABLE IF EXISTS book;
+CREATE TABLE book (
     id BIGSERIAL PRIMARY KEY NOT NULL,
     author varchar(255) NOT NULL,
     isbn varchar(255) UNIQUE NOT NULL,

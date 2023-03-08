@@ -12,6 +12,8 @@ polar:
   greeting: Welcome to the local book catalog!
 
 spring:
+  application:
+    name: catalog-service
   datasource:
     username: polardb_catalog
     password: polardb_catalog
@@ -19,9 +21,17 @@ spring:
     hikari:
       connection-timeout: 2000
       maximum-pool-size: 5
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
+  # Instruct Spring to initialize the database and use the file schema.sql
   sql:
     init:
       mode: always
+
   cloud:
     config:
       enabled: false

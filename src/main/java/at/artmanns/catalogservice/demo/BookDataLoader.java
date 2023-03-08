@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -20,8 +21,21 @@ public class BookDataLoader {
     @EventListener(ApplicationReadyEvent.class)
     public void loadBookTestData() {
         bookRepository.deleteAll();
-        var book1 = Book.of("1234567891", "Northern Lights", "Lyra Silvestar", 9.90);
-        var book2 = Book.of("1234567892", "Polar Journey", "Iorek Polarson", 12.90);
+        var book1 = Book.builder()
+                .isbn("1234567891")
+                .title( "Northern Lights")
+                .author("Lyra Silvestar")
+                .price(9.90)
+                .build();
+
+        var book2 = Book.builder()
+                .isbn("1234567892")
+                .title( "Polar Journey")
+                .author("Iorek PolarsonIorek Polarson")
+                .price(12.90)
+                .build();
+
+
         bookRepository.saveAll(List.of(book1, book2));
     }
 
