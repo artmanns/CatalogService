@@ -16,8 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 )
 @ActiveProfiles("integration")
 class CatalogServiceApplicationTests {
-
-
+    
     @Autowired
     private WebTestClient webTestClient;
 

@@ -22,6 +22,7 @@ public class BookValidationTests {
         validator = factory.getValidator();
     }
 
+    
     @Test
     void whenAllFieldsCorrectThenValidationSuceeds() {
         var book = Book.builder()

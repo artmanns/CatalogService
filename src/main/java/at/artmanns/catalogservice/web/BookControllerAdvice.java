@@ -23,14 +23,14 @@ public class BookControllerAdvice {
 
     @ExceptionHandler(BookAlreadyExistsException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    String bookAlreadyExistsHanlder(BookAlreadyExistsException ex) {
+    String bookAlreadyExistsHandler(BookAlreadyExistsException ex) {
         return ex.getMessage();
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, String> handleValidateionExceptions(
-            MethodArgumentNotValidException ex
+    public Map<String, String> handleValidationExceptions(
+        MethodArgumentNotValidException ex
     ) {
         var errors = new HashMap<String, String>();
         ex.getBindingResult().getAllErrors().forEach(error -> {
