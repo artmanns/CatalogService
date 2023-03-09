@@ -6,4 +6,5 @@ public class BookAlreadyExistsException extends RuntimeException {
         super("A book with ISBN " + isbn + " already exists.");
     }
 
+    
 }

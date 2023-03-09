@@ -13,7 +13,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @AutoConfigureTestDatabase(
-        replace = AutoConfigureTestDatabase.Replace.NONE
+    replace = AutoConfigureTestDatabase.Replace.NONE
 )
 @ActiveProfiles("integration")
 @DataJpaTest
@@ -30,12 +30,14 @@ public class BookRepositoryJpaTests {
     void findBookByIsbnWhenExisting() {
         var bookIsbn = "1234567123";
 
+
         var book = Book.builder()
-                .isbn(bookIsbn)
-                .title( "Title")
-                .author("Author")
-                .price(9.90)
-                .build();
+            .isbn(bookIsbn)
+            .title("Title")
+            .author("Author")
+            .price(9.90)
+            .publisher("APublisher")
+            .build();
 
         entityManager.persist(book);
 

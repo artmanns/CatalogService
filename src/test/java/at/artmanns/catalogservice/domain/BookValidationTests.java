@@ -6,8 +6,10 @@ import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class BookValidationTests {
@@ -23,11 +25,12 @@ public class BookValidationTests {
     @Test
     void whenAllFieldsCorrectThenValidationSuceeds() {
         var book = Book.builder()
-                        .isbn("1234567890")
-                        .title( "Title")
-                        .author("Author")
-                        .price(9.90)
-                        .build();
+            .isbn("1234567890")
+            .title("Title")
+            .author("Author")
+            .price(9.90)
+            .publisher("APublisher")
+            .build();
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertThat(violations).isEmpty();
     }
@@ -35,14 +38,15 @@ public class BookValidationTests {
     @Test
     void whenIsbnDefinedButIncorrectTHenValidationFails() {
         var book = Book.builder()
-                        .isbn("123456789012344")
-                        .title( "Title")
-                        .author("Author")
-                        .price(9.90)
-                        .build();
+            .isbn("123456789012344")
+            .title("Title")
+            .author("Author")
+            .price(9.90)
+            .publisher("APublisher")
+            .build();
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertThat(violations).hasSize(1);
         assertThat(violations.iterator().next().getMessage())
-                .isEqualTo("The ISBN format mus be valid.");
+            .isEqualTo("The ISBN format mus be valid.");
     }
 }

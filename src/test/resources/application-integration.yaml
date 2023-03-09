@@ -2,3 +2,6 @@ spring:
   datasource:
     url: jdbc:tc:postgresql:14.4:///
 
+
+  flyway:
+    clean-disabled: false

@@ -27,10 +27,10 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
 
-  # Instruct Spring to initialize the database and use the file schema.sql
-  sql:
-    init:
-      mode: always
+  # Instruct Spring to initialize the database by using the file schema.sql
+#  sql:
+#    init:
+#      mode: always
 
   cloud:
     config:

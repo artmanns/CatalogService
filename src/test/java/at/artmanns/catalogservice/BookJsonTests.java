@@ -18,11 +18,12 @@ public class BookJsonTests {
     void testSerialize() throws Exception {
 
         var book = Book.builder()
-                .isbn("1234567891")
-                .title( "Northern Lights")
-                .author("Lyra Silvestar")
-                .price(9.90)
-                .build();
+            .isbn("1234567891")
+            .title("Northern Lights")
+            .author("Lyra Silvestar")
+            .price(9.90)
+            .publisher("APublisher")
+            .build();
 
 
         var jsonContent = json.write(book);
@@ -30,6 +31,7 @@ public class BookJsonTests {
         assertThat(jsonContent).extractingJsonPathStringValue("@.title").isEqualTo(book.getTitle());
         assertThat(jsonContent).extractingJsonPathStringValue("@.author").isEqualTo(book.getAuthor());
         assertThat(jsonContent).extractingJsonPathNumberValue("@.price").isEqualTo(book.getPrice());
+        assertThat(jsonContent).extractingJsonPathStringValue("@.publisher").isEqualTo(book.getPublisher());
 
     }
 
@@ -40,19 +42,21 @@ public class BookJsonTests {
                 "isbn":"1234567890",
                 "title":"Title",
                 "author":"Author",
-                "price":9.90
+                "price":9.90,
+                "publisher":"APublisher"
             }
-           
+                       
             """;
 
         assertThat(json.parse(content))
-                .usingRecursiveComparison()
-                .isEqualTo( Book.builder()
-                        .isbn("1234567890")
-                        .title( "Title")
-                        .author("Author")
-                        .price(9.90)
-                        .build()
-        );
+            .usingRecursiveComparison()
+            .isEqualTo(Book.builder()
+                .isbn("1234567890")
+                .title("Title")
+                .author("Author")
+                .price(9.90)
+                .publisher("APublisher")
+                .build()
+            );
     }
 }

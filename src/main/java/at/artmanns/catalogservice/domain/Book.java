@@ -27,41 +27,43 @@ import java.time.LocalDateTime;
 @Builder
 public class Book {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "id", nullable = false)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-        @NotBlank(message = "The book ISBN must be defined.")
-        @Pattern(
-                regexp = "^([0-9]{10}|[0-9]{13})$",
-                message = "The ISBN format mus be valid."
-        )
-        private String isbn;
-        @NotBlank(
-                message = "The book title must be defined."
-        )
-        private String title;
-        @NotBlank(
-                message = "The author must be defined."
-        )
-        private String author;
-        @NotNull(
-                message = "The price must be defined."
-        )
-        @Positive (
-                message = "The book price must be greater than zero."
-        )
-        private Double price;
+    @NotBlank(message = "The book ISBN must be defined.")
+    @Pattern(
+        regexp = "^([0-9]{10}|[0-9]{13})$",
+        message = "The ISBN format mus be valid."
+    )
+    private String isbn;
+    @NotBlank(
+        message = "The book title must be defined."
+    )
+    private String title;
+    @NotBlank(
+        message = "The author must be defined."
+    )
+    private String author;
+    @NotNull(
+        message = "The price must be defined."
+    )
+    @Positive(
+        message = "The book price must be greater than zero."
+    )
+    private Double price;
 
-        @CreationTimestamp
-        private LocalDateTime createdDate;
+    String publisher;
 
-        @UpdateTimestamp
-        private LocalDateTime lastModifiedDate;
+    @CreationTimestamp
+    private LocalDateTime createdDate;
 
-        @Version
-        private int version;
+    @UpdateTimestamp
+    private LocalDateTime lastModifiedDate;
+
+    @Version
+    private int version;
 
 
 }
